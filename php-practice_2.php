@@ -52,13 +52,22 @@ foreach ($personalInfos as $index => $personalInfo) {
 
 $ageList = [25, 30, 18];
 
-foreach ($ageList as $age => $personalInfo) {
-  $personalInfos[0] += array("age" => 25);
-  $personalInfos[1] += array("age" => 30);
-  $personalInfos[2] += array("age" => 18);
-
-  var_dump($personalInfos);
+foreach ($personalInfos as $index => $info) {
+  $personalInfos[$index]['age'] = $ageList[$index];
+  // $info = $ageList[$index]; // ＄infoはコピーなので、元の$personalInfos内のバリューは変えられない
 }
+
+// 別解
+foreach ($ageList as $index => $age) {
+  $personalInfos[$index]['age'] = $age;
+}
+
+// foreach (配列名 as キーもしくはインデックス番号 => バリュー) {
+//     // 繰り返したい処理
+// }
+
+var_dump($personalInfos);
+
 
 
 // Q3 オブジェクト-1
@@ -93,13 +102,20 @@ $yamada->attend('PHP');
 // Q5 定義済みクラス
 // 問題１
 
-$lastmonth = mktime(0, 0, 0, date("m") - 1, date("d"),   date("Y"));
+$date = new DateTime(); // 現在時刻にしたいので引数なし
 
-echo date('Y-m-d');
+// $lastMonth = $date->modify('-1 month');
+// echo $lastMonth->format('Y-m-d') . "\n";
 
+// メソッドチェーンを使うと・・・
+echo $date->modify('-1 month')->format('Y-m-d') . "\n";
 
 // 問題２
-$origin = new DateTimeImmutable('now');
-$target = new DateTimeImmutable('1992-04-25');
-$interval = $origin->diff($target);
-echo $interval->format('あの日から%a日経過しました。');
+$origin = new DateTime(); // 現在時刻にしたいので引数なし
+$target = new DateTime('1992-04-25');
+
+// $interval = $origin->diff($target);
+// echo $interval->format('あの日から%a日経過しました。');
+
+// メソッドチェーンを使うと・・・
+echo $$origin->diff($target)->format('あの日から%a日経過しました。') . "\n";

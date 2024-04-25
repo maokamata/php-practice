@@ -29,7 +29,7 @@ if ($device === 'mac' || $device === 'windows') {
 $age = 25;
 $age = ($age >= 18) ? '成人です。' : '未成年です。';
 
-echo $age
+echo $age;
 
 // Q6 配列
 $prefectures = [
@@ -125,11 +125,12 @@ $price = '1000';
 
 function calcTaxInPrice($price)
 {
-  $taxInPrice = $price * 1.1;
-  return $taxInPrice;
+  return $price * 1.1;
 }
 
-echo $price . "円の商品の税込価格は" . calcTaxInPrice($price) . "円です。";
+$taxInPrice = calcTaxInPrice($price);
+
+echo $price . "円の商品の税込価格は" . $taxInPrice . "円です。";
 
 // Q12 関数とif文
 function distinguishNum($num)
@@ -153,19 +154,15 @@ function evaluateGrade($grade)
     case 'A':
     case 'B':
       return '合格です。';
-      break;
 
     case 'C':
       return '合格ですが追加課題があります。';
-      break;
 
     case 'D':
       return '不合格です。';
-      break;
 
     default:
       return '判定不明です。講師に問い合わせてください。';
-      break;
   }
 }
 echo evaluateGrade('A');
